@@ -22,7 +22,7 @@ void vector<T>::refreshTail() {
 
 template <class T>
 void vector<T>::push_front(T data) {
-    Node<T>* node = new Node<T> ,* tmp;
+    Node<T>* node = new Node<T>, * tmp;
     node->createNode(data);
     tmp = head->getNext();
     head->setNext(node);
@@ -31,6 +31,7 @@ void vector<T>::push_front(T data) {
         tmp->setPreview(node);
     if (node != NULL)
         node->setPreview(head);
+    refreshTail();
 }
 
 template <class T>
@@ -53,6 +54,7 @@ void vector<T>::pop_front() {
         if (head->getNext() != NULL)
             head->getNext()->setPreview(head);
     }
+    refreshTail();
 }
 
 template <class T>
@@ -185,14 +187,14 @@ double vector<string>::average() const {
 
 template <class T>
 void vector<T>::swap(int index1, int index2) {
-    Node<T>* tmp1= head;
+    Node<T>* tmp1 = head;
     Node<T>* tmp2 = head;
     T temp;
     for (int i = 0; i < index1; i++) {
         if (tmp1->getNext() == nullptr) {
             cout << "invalid input size!" << endl << endl;
             return;
-        }     
+        }
         tmp1 = tmp1->getNext();
     }
     for (int i = 0; i < index2; i++) {
@@ -316,9 +318,7 @@ void vector<T>::sort() {
 }
 
 template <class T>
-vector<T>::~vector() {
-    cout << "Cleared" << endl;
-}
+vector<T>::~vector() {}
 template class vector<int>;
 template class vector<double>;
 template class vector<char>;
